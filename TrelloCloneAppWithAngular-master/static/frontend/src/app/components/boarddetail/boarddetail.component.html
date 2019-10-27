@@ -1,0 +1,68 @@
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #606977!important;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav" >
+        <div *ngIf="route.url.includes('board/detail/')">
+  
+        <li  class="nav-item active">
+          <a class="nav-link font-weight-bold text-uppercase" style="color: #F7F0C6" href="#">{{ boards.title }}<span class="sr-only">(current)</span></a>
+        </li>
+  
+      </div>
+        <li class="nav-item">
+          <a class="nav-link" style="color: #F7F0C6" [routerLink]="['/create/board']">Create Board</a>
+        </li>
+        <li class="nav-item">
+          <!-- <button ng-click="boardList()" class="nav-link" >Boards</button> -->
+          <a style="color: #F7F0C6" [routerLink]="['/boards']" ng-click="boardList()" class="nav-link" >Boards</a>
+        </li>
+  
+  
+        <li class="nav-item">
+            <!-- <button ng-click="boardList()" class="nav-link" >Boards</button> -->
+            <a style="color: #5D0D02" routerLink="/board/{{boards.id}}/deleted" ng-click="boardList()" class="nav-link" >Delete</a>
+          </li>
+        
+      </ul>
+    </div>
+  </nav>
+  
+  
+  <div>
+  
+  <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i> -->
+  
+  
+    <form class="form-inline"  
+          [formGroup]="form"  
+          (ngSubmit)="createList()"
+          method="post">
+  
+      <div class="form-group mx-sm-3 mb-2">
+        <input type="text" 
+               class="form-control" 
+               id="inputPassword2"
+               formControlName='listName'
+               name='listName'
+               placeholder="Add List">
+      </div>
+  
+      <button 
+            type="submit"
+            style="background-color: transparent; border: none; padding: 0;"
+            >
+          <i class="fas fa-plus-square fa-2x"   ></i>
+          </button>
+  
+    </form>
+  
+  </div>
+  
+  <div>
+  
+  <app-boardlist *ngFor="let list of lists" [list]="list"></app-boardlist>
+        <!-- <app-boardlist></app-boardlist> -->
+  
+  </div>

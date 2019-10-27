@@ -1,0 +1,43 @@
+<div style="text-align:center">
+  <h1>
+    Login To Trello
+  </h1>
+
+
+
+    <form 
+      [formGroup]="form"  
+      (ngSubmit)="loginUser()" 
+      
+      id="login-form"
+    >
+
+        <input 
+          formControlName="username"
+          id="username-input" 
+          class="form-control" 
+          type="text" 
+          name="username"
+          placeholder="username"
+        >
+
+        <input 
+          formControlName="password"
+          id="password-input" 
+          class="form-control" 
+          type="text" 
+          name="password"
+          placeholder="password"
+        >
+        
+        <button 
+          type="submit"
+        >
+          login
+        </button>
+    
+    </form>
+    <p (ngClick)="registerUser()">no account? click <a href="register" (ngClick)="registerUser()" >here</a> to register</p>
+
+
+</div>
