@@ -147,9 +147,12 @@ class CardViewSet(viewsets.ViewSet):
     serializer_class = CardSerializer
 
     def card_list(self, request, **kwargs):
-        cards = Card.objects.all()
+        board_id = kwargs.get('board_id')
+        list_id = kwargs.get('list_id')
+        board_list = get_object_or_404(TrelloList, pk=list_id)
+        cards = Card.objects.filter(trello_list=board_list, archive=False)
         serializer = self.serializer_class(cards, many=True)
-        return Response(serializer.data,)
+        return Response(serializer.data, status=200)
 
     def card_create(self, request, **kwargs):
         serializer = self.serializer_class(data=request.data)

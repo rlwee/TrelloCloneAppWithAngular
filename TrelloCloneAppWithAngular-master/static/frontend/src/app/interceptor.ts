@@ -20,12 +20,9 @@ export class Interceptor implements HttpInterceptor{
         private cookieService: CookieService){}
 
     intercept (r: HttpRequest<any>, n: HttpHandler) : Observable <HttpEvent <any>> {
-        console.log("INTERCEPTED")
         const token = localStorage.getItem('Autorization')
-        console.log(token, 'test')
         if ( localStorage.getItem('Authorization') == null ){
             
-            console.log('interceptest')
             const req = r.clone({
             
                 //headers: r.headers.set('Authorization', 'Token ' + localStorage.getItem('Authorization')),
@@ -66,7 +63,6 @@ export class Interceptor implements HttpInterceptor{
 
         else if ( localStorage.getItem('Authorization') != null ){
             
-                console.log('interceptest')
                 const req = r.clone({
 
                     setHeaders: { 'X-CSRFToken': this.cookieService.get('csrftoken'),

@@ -34,6 +34,36 @@
                 <div class="card-body">
                   <!-- <p class="card-text">Date Created: {{ board.date_created|date }}</p>
                   <p class="card-text">Created By: {{ board.owner }}</p> -->
+
+                  
+                      <app-cards *ngFor="let card of cards" 
+                                 [card]="card"
+                                 
+                                 >
+                      </app-cards>
+                  
+
+                    <form class="form-inline"  
+                        [formGroup]="form"  
+                        (ngSubmit)="createCard()"
+                        method="post">
+                
+                            <div class="form-group mx-sm-3 mb-2">
+                                <input type="text" 
+                                    class="form-control" 
+                                    id="card name"
+                                    formControlName='cardName'
+                                    name='cardName'
+                                    placeholder="Add Card"
+                                >
+                            </div>
+                
+                            <button 
+                                type="submit"
+                                style="background-color: transparent; border: none; padding: 0;"
+                            >
+                            </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -50,10 +80,9 @@
                         Create Card
                     </p>
 
-                    <button routerLink="/board/{{ list.board }}/list/{{list.id}}/deleted/" >
+                    <button id="delete-list" (click)="deletelist(list, list.id, list.board)" style="background-color:transparent; ">
                         <p>
-                            Delete List
-                        </p>
+                            Delete list
                     </button>
 
                 </div>
@@ -67,4 +96,4 @@
         Popover on right
     </button> -->
 
-    
+    <a routerLink="/board/{{ list.board }}/list/{{list.id}}/deleted/" ></a>

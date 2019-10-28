@@ -8,3 +8,11 @@
     border-top-left-radius: calc(.3rem - 1px);
     border-top-right-radius: calc(.3rem - 1px);
 }
+
+#delete-list:hover{
+    color: red;
+}
+
+#delete-list{
+    border: none;
+}

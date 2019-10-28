@@ -15,7 +15,6 @@ export class BoardlistService {
 
   displayLists(board_id:number):Observable<any>{
     let url = this.listsURL + `${board_id}/lists/`
-    console.log(url, 'URL TEST BACKEND')
     return this.http.get(url)
   }
   

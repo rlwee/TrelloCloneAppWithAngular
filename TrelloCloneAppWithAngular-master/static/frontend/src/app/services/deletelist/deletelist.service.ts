@@ -21,4 +21,13 @@ export class DeletelistService {
   }
 
 
+  deleteList(list_id, board_id): Observable<any> {
+
+      console.log(list_id, "list_id");
+      console.log(board_id, 'board_id');
+      const url = this.delete_url + `${board_id}/` + 'list/' + `${list_id}/` + 'deleted/';
+
+      return this.http.get(url)
+  }
+
 }

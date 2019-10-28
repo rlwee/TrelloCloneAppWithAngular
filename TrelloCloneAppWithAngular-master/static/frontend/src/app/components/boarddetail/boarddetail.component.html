@@ -49,7 +49,7 @@
                placeholder="Add List">
       </div>
   
-      <button 
+          <button 
             type="submit"
             style="background-color: transparent; border: none; padding: 0;"
             >
@@ -64,7 +64,11 @@
   <div>
   <!-- <app-boardlist></app-boardlist> -->
     
-  <app-boardlist *ngFor="let list of lists" [list]="list"></app-boardlist>
+  <app-boardlist *ngFor="let list of lists" 
+                 [list]="list" 
+                 (addcard)="addcard($event)"
+                 >
+  </app-boardlist>
 
   </div>
 

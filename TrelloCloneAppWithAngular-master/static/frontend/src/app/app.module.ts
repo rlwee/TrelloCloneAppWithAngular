@@ -23,6 +23,7 @@ import { BoardlistComponent } from './components/boardlist/boardlist.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DeletelistComponent } from './components/deletelist/deletelist.component';
+import { CardsComponent } from './components/cards/cards.component';
 
 @NgModule({
   declarations: [ 
@@ -38,6 +39,7 @@ import { DeletelistComponent } from './components/deletelist/deletelist.componen
     BoardheaderComponent,
     BoardlistComponent,
     DeletelistComponent,
+    CardsComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,9 +3,11 @@ import { ActivatedRoute,Router } from '@angular/router';
 import { BoarddetailService } from '../../services/boarddetail/boarddetail.service';
 import { Board } from '../../models/boards';
 import { BoardlistService } from '../../services/boardlist/boardlist.service';
+import { CreatecardService } from '../../services/createcard/createcard.service';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { List } from  '../../models/lists'
+import { Card } from '../../models/cards';
 
 
 @Component({
@@ -17,7 +19,8 @@ import { List } from  '../../models/lists'
 export class BoarddetailComponent implements OnInit {
   boards:Board[] = [];
   board:Board[]
-  lists:List[] = []; 
+  lists:List[] = [];
+  cards:Card[];
 
   
 
@@ -31,7 +34,9 @@ export class BoarddetailComponent implements OnInit {
               private boardDetail:BoarddetailService, 
               private route:Router, 
               private r:ActivatedRoute,
-              private renderer:Renderer2) { }
+              private renderer:Renderer2,
+              private cardService:CreatecardService
+              ) { }
 
   ngOnInit() {
     let board_id = + this.r.snapshot.paramMap.get('id');
@@ -50,18 +55,22 @@ export class BoarddetailComponent implements OnInit {
   }
 
     createList():void{
-      console.log(this.lists)
       if(this.form.valid){
         console.log(this.form, "ADAS")
         this.boardDetail.createList(this.form.value.listName, this.boards).subscribe( 
         data => {
-          console.log(data)
+          console.log(data,'oush')
           this.lists.push(data)
       });
       }
     }
 
-
+    addcard(list:List, card:Card){
+      
+          console.log(card, 'testing testing')
+        
+          
+    }
 
   }
 

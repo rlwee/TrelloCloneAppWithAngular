@@ -34,10 +34,13 @@ class TrelloList(models.Model):
 
 class Card(models.Model):
     title = models.CharField(max_length=50)
-    labels = models.CharField(max_length=50)
+    labels = models.CharField(max_length=50, default='no label')
     date_created = models.DateTimeField(default=timezone.now)
     trello_list = models.ForeignKey('TrelloList', on_delete=models.CASCADE)
     archive = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
