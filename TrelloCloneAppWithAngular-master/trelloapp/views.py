@@ -127,6 +127,19 @@ class TrelloListViewSet(viewsets.ViewSet):
 
         serializer = self.serializer_class(blists)
         return Response(serializer.data, status=200)
+        
+
+    def trello_list_delete(self, request, **kwargs):
+        board_id = kwargs.get('board_id')
+        list_id = kwargs.get('list_id')
+        board = get_object_or_404(Board, id=board_id)
+        blist = get_object_or_404(TrelloList, id=list_id, board_id=board_id)
+        listID = get_object_or_404(TrelloList, id=list_id, board_id=board_id)
+        tlist = TrelloList.objects.get(id=list_id, board_id=board_id)
+        if request.user.is_authenticated:
+            blist.delete()
+            return Response(status=200)
+
 
 class CardViewSet(viewsets.ViewSet):
 
@@ -179,8 +192,8 @@ class UserViewSet(viewsets.ViewSet):
         username = request.data.get('username')
         password = request.data.get('password') 
         user = authenticate(request, username=username, password=password)
-        # userA = User.objects.get(username=username)
-        
+        # userA = User.objects.get(username=user)
+        # import pdb; pdb.set_trace()
         if user is not None:
             token = Token.objects.get(user=user)
             print(token.key, 'token')

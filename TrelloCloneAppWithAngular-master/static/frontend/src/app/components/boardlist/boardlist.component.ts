@@ -5,6 +5,8 @@ import { Board } from '../../models/boards';
 import { BoardlistService } from '../../services/boardlist/boardlist.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { DeletelistService } from '../../services/deletelist/deletelist.service'
+
 
 @Component({
   selector: 'app-boardlist',
@@ -12,10 +14,11 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./boardlist.component.css']
 })
 export class BoardlistComponent implements OnInit {
-  @Input() list:List
+  @Input() list:List;
   closeResult: string;
+  lists:List[] = [];
 
-  board:Board[];
+  
 
 
   
@@ -24,7 +27,8 @@ export class BoardlistComponent implements OnInit {
   
   constructor(private blist:BoardlistService, 
               private route:Router, 
-              private r:ActivatedRoute , 
+              private r:ActivatedRoute,
+              private deleteList:DeletelistService 
               ) { }
 
   ngOnInit() {
@@ -41,17 +45,12 @@ export class BoardlistComponent implements OnInit {
     //   console.log(this.list,'LIST LIST TEST')
     //   // this.lists = data;
     // })
-  }
-
-
-  
-
-  createList():void{
 
   }
 
-
-
- 
+  deletelist(){
+    
+  }
+    
 
 }

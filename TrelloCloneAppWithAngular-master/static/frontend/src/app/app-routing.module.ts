@@ -10,6 +10,7 @@ import { CreateboardComponent } from './components/createboard/createboard.compo
 import { BoarddetailComponent } from './components/boarddetail/boarddetail.component';
 import { DeleteboardComponent } from './components/deleteboard/deleteboard.component';
 import { BoardlistComponent } from './components/boardlist/boardlist.component';
+import { DeletelistComponent } from './components/deletelist/deletelist.component';
 
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
@@ -21,7 +22,8 @@ const routes: Routes = [
                       {path: 'create/board', component: CreateboardComponent},
                       {path: 'board/detail/:id', component: BoarddetailComponent},
                       {path: 'board/:id/deleted', component:DeleteboardComponent},
-                      {path: 'board/detail/:id/lists', component:BoardlistComponent}
+                      {path: 'board/detail/:id/lists', component:BoardlistComponent},
+                      {path: 'board/:board/list/:id/deleted', component:DeletelistComponent}
                        ];
 
 @NgModule({

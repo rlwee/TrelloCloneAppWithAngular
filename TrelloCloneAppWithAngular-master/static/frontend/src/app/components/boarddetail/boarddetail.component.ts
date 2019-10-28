@@ -19,7 +19,9 @@ export class BoarddetailComponent implements OnInit {
   board:Board[]
   lists:List[] = []; 
 
-  @ViewChild('div') div: ElementRef;
+  
+
+  // @ViewChild('div') div: ElementRef;
 
   form: FormGroup = new FormGroup({
     listName: new FormControl('',Validators.required)
@@ -40,8 +42,12 @@ export class BoarddetailComponent implements OnInit {
 
     this.blist.displayLists(board_id).subscribe( data => {
       this.lists = data;
+
     })
-    }
+
+
+
+  }
 
     createList():void{
       console.log(this.lists)

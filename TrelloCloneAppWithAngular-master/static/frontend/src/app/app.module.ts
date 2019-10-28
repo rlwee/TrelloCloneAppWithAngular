@@ -20,6 +20,10 @@ import { DeleteboardComponent } from './components/deleteboard/deleteboard.compo
 import { BoarddetailComponent } from './components/boarddetail/boarddetail.component';
 import { BoardheaderComponent } from './layout/boardheader/boardheader.component';
 import { BoardlistComponent } from './components/boardlist/boardlist.component';
+
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { DeletelistComponent } from './components/deletelist/deletelist.component';
+
 @NgModule({
   declarations: [ 
     AppComponent,
@@ -33,12 +37,14 @@ import { BoardlistComponent } from './components/boardlist/boardlist.component';
     BoarddetailComponent,
     BoardheaderComponent,
     BoardlistComponent,
+    DeletelistComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS,
