@@ -25,6 +25,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DeletelistComponent } from './components/deletelist/deletelist.component';
 import { CardsComponent } from './components/cards/cards.component';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 @NgModule({
   declarations: [ 
     AppComponent,
@@ -47,6 +49,7 @@ import { CardsComponent } from './components/cards/cards.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
+    DragDropModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS,

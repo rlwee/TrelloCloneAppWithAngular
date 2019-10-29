@@ -3,8 +3,17 @@
 </p> -->
 
 
-<div class="card bg-light mb-3" style="max-width: 18rem;">
-  <div  class="card-header " style="color: black; "> <span id="card-title">{{ card.title }}</span> 
+<!-- <div
+cdkDropList
+#todoList="cdkDropList"
+[cdkDropListData]="todo"
+[cdkDropListConnectedTo]="[doneList]"
+class="example-list"
+(cdkDropListDropped)="drop($event)"> -->
+
+
+<div class="card bg-light mb-3" style="max-width: 18rem;" >
+  <div  class="card-header " style="color: black; " > <span id="card-title">{{ card.title }}</span> 
   <!-- <div class="card-body">
     <h5 class="card-title">Light card title</h5>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -16,6 +25,7 @@
         placement="right"
         [ngbPopover]="popContent"
         popoverTitle= "Card: {{ card.title }}"
+        cdkDrag
         >
 
                 <i id="trash" class="fa fa-trash" aria-hidden="true" ></i>
@@ -38,3 +48,8 @@
 
   </div>
 </ng-template>
+
+
+
+<!-- </div> -->
+

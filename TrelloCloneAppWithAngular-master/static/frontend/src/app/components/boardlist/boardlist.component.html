@@ -32,16 +32,35 @@
                                         </button>
                 </div>
                 
-                <div class="card-body">
+                <div class="card-body" >
                   <!-- <p class="card-text">Date Created: {{ board.date_created|date }}</p>
                   <p class="card-text">Created By: {{ board.owner }}</p> -->
+                    <div cdkDropListGroup>
+                        <div
+                            cdkDropList
+                            
+                            #todoList="cdkDropList"
+                            [cdkDropListData]="cards"
+                            class="example-list"
+                            (cdkDropListDropped)="drop($event)"
+                            [cdkDropListConnectedTo]="[todoList]"
+                        >
 
-                  
-                      <app-cards *ngFor="let card of cards" 
-                                 [card]="card"
-                                 (removecard)="removecard($event)"
-                                 >
-                      </app-cards>
+
+                            <app-cards *ngFor="let card of cards" 
+                                        [card]="card"   
+                                        (removecard)="removecard($event)"
+                                        cdkDrag
+                                        >
+                            </app-cards>
+                        <!-- </div> -->
+                            
+                        </div>
+                    </div>
+
+                        
+
+                    
                   
 
                     <form class="form-inline"  

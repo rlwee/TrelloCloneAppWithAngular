@@ -10,7 +10,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Card } from '../../models/cards';
 import { CreatecardService } from '../../services/createcard/createcard.service';
 import { CardsService } from '../../services/cards/cards.service';
-import { DeletecardService } from '../../services/deletecard/deletecard.service'
+import { DeletecardService } from '../../services/deletecard/deletecard.service';
+
+
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-boardlist',
@@ -26,7 +29,7 @@ export class BoardlistComponent implements OnInit {
   lists:List[] = [];
   cards:Card[] = [];
   card:Card;
-  
+  cont:Card[] = [];
 
   id:number;
   title:string;
@@ -106,6 +109,22 @@ export class BoardlistComponent implements OnInit {
     this.cards = this.cards.filter(dt => dt.id !== card.id);
 
     this.delcard.deletecard(card.id, card.trello_list).subscribe();
+  }
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+
+                        
+    }
+    console.log(event.container)
   }
 
 
