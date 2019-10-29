@@ -67,12 +67,13 @@
   <app-boardlist *ngFor="let list of lists" 
                  [list]="list" 
                  (removelist)="removelist($event)"
-                 (addcard)="addcard($event)"
+                 
                  >
-
+                 <!-- (addcard)="addcard($event)" -->
   
   
   </app-boardlist>
+
 
   </div>
 

@@ -67,6 +67,7 @@ export class BoarddetailComponent implements OnInit {
           this.lists.push(data)
       });
       }
+      this.form.reset();
     }
 
     // this.lists.filter(dt => dt.id !== list_id)
@@ -78,16 +79,15 @@ export class BoarddetailComponent implements OnInit {
       this.deleteList.deleteList(list.id, list.board).subscribe();
     }
 
-    addcard(card:Card){
+    // addcard(card:Card){
 
-        console.log(card, 'testing testing')
-        this.createCardo.createCard(card.title, card.trello_list).subscribe(
-          data =>{
-            console.log(data, "sulod sulod")
-            this.cards.push(card);
-        })
+    //     console.log(card, 'testing testing')
+    //     this.createCardo.createCard(card.title, card.trello_list).subscribe(
+    //       data =>{
+    //         this.cards.push(card);
+    //     })
         
-      }
+    //   }
   }
 
    

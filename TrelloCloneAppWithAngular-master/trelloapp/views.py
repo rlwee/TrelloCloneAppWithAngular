@@ -157,8 +157,8 @@ class CardViewSet(viewsets.ViewSet):
     def card_create(self, request, **kwargs):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            serializer = serializer.save()
-            return Response(serializer.title, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=400)
 
     def card_detail(self, request, **kwargs):

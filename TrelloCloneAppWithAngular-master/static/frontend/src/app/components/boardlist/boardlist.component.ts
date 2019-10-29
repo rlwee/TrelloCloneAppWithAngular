@@ -79,15 +79,7 @@ export class BoardlistComponent implements OnInit {
 
   }
 
-  // deletelist(list, list_id:number, list_board:number){
-  //   this.lists = list
-    
-  //   this.deleteList.deleteList(list_id, list_board).subscribe(
-  //     data => {
 
-        
-  //   })
-  // }
 
   deletelist(list, list_id:number, list_board:number){
     this.removelist.emit(list);
@@ -95,51 +87,19 @@ export class BoardlistComponent implements OnInit {
 
     
   
-  // createCard():void{
+  createCard():void{
     
-  //   if(this.form.valid){
-  //     this.createCardo.createCard(this.form.value.cardName, this.list).subscribe(
-  //       data =>{
+    if(this.form.valid){
+      this.createCardo.createCard(this.form.value.cardName, this.list).subscribe(
+        data =>{
           
-  //         this.cards.push(card);
-  //     })
-      
-  //   }
-     
-  // }
-
-  createCard(){
-    const card = {
-      id: this.id,
-      title: this.form.value.cardName,
-      labels:this.labels,
-      date_created:this.date_created,
-      trello_list:this.list.id,
-      archive:this.archive,
+          this.cards.push(data);
+      })
+      this.form.reset();
     }
-    console.log(card, "pksopafkaspfkaskfop")
-
-    this.addcard.emit(card)
+     
   }
 
 
-  
-
-  // displayCards(){
-  //   this.cardo.cardList(this.list.board, this.list.id).subscribe( 
-  //     data => {
-  //       this.cards = data;
-
-  //       const card = {
-  //         id: data.id,
-  //         title: data.title,
-  //         labels: data.labels,
-  //         date_created: data.date_created,
-  //         trello_list:data.trello_list,
-  //         archive: false,
-  //       }
-  //       this.viewcards.emit(card);
-  //   })
-  // }
 
 }

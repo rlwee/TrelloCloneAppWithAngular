@@ -13,7 +13,7 @@ export class CreatecardService {
 
   createCard(cardTitle, list): Observable<any>{
     console.log(list,"list id testing")
-    let card = {title:cardTitle, trello_list:list}
+    let card = {title:cardTitle, trello_list:list.id}
     return this.http.post(this.createCardUrl, card)
   }
 
