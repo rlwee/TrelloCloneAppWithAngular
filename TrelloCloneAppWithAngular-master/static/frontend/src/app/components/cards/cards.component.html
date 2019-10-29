@@ -4,12 +4,37 @@
 
 
 <div class="card bg-light mb-3" style="max-width: 18rem;">
-  <div class="card-header" style="color: black;"> {{ card.title }} </div>
+  <div  class="card-header " style="color: black; "> <span id="card-title">{{ card.title }}</span> 
   <!-- <div class="card-body">
     <h5 class="card-title">Light card title</h5>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
   </div> -->
+
+        <button type="button" 
+        id="delete-card"
+        class="btn btn-outline-secondary mr-2" 
+        placement="right"
+        [ngbPopover]="popContent"
+        popoverTitle= "Card: {{ card.title }}"
+        >
+
+                <i id="trash" class="fa fa-trash" aria-hidden="true" ></i>
+
+        </button>
+
+      </div>
 </div>
 
 
 
+<ng-template #popContent>
+  <div ng-controller="boardlistcontrol" ng-app="plunker">
+
+      <button id="delete" (click)="deletecard(card, card.id, card.board)" style="background-color:transparent; ">
+       <p>
+        Delete Card
+      </p>
+      </button>
+
+  </div>
+</ng-template>

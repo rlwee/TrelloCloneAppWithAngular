@@ -10,6 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Card } from '../../models/cards';
 import { CreatecardService } from '../../services/createcard/createcard.service';
 import { CardsService } from '../../services/cards/cards.service';
+import { DeletecardService } from '../../services/deletecard/deletecard.service'
 
 @Component({
   selector: 'app-boardlist',
@@ -18,7 +19,7 @@ import { CardsService } from '../../services/cards/cards.service';
 })
 export class BoardlistComponent implements OnInit {
   @Input() list:List;
-  @Output() removelist: EventEmitter<List> =new EventEmitter();
+  @Output() removelist: EventEmitter<List> = new EventEmitter();
   
 
   closeResult: string;
@@ -51,7 +52,8 @@ export class BoardlistComponent implements OnInit {
               private r:ActivatedRoute,
               private deleteList:DeletelistService,
               private createCardo:CreatecardService,
-              private cardo:CardsService
+              private cardo:CardsService,
+              private delcard:DeletecardService
               ) { }
 
   ngOnInit() {
@@ -100,6 +102,11 @@ export class BoardlistComponent implements OnInit {
      
   }
 
+  removecard(card:Card){
+    this.cards = this.cards.filter(dt => dt.id !== card.id);
+
+    this.delcard.deletecard(card.id, card.trello_list).subscribe();
+  }
 
 
 }

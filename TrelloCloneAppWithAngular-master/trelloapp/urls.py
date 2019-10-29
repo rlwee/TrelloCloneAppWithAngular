@@ -24,6 +24,7 @@ urlpatterns = [
     path('boards/<int:board_id>/lists/', TrelloListViewSet.as_view({'get':'trello_list'}), name='boardlistahan'),
     path('board/<int:board_id>/list/<int:list_id>/deleted/', TrelloListViewSet.as_view({'get':'trello_list_delete'}), name='list-delete'),
     path('board/<int:board_id>/list/<int:list_id>/cards/', CardViewSet.as_view({'get':'card_list'}), name='card-list'),
+    path('list/<int:list_id>/card/<int:card_id>/deleted/', CardViewSet.as_view({'get':'card_delete'}), name='card-delete'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

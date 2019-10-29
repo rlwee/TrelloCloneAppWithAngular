@@ -166,6 +166,14 @@ class CardViewSet(viewsets.ViewSet):
         serializer = self.serializer_class(cards)
         return Response(serializer.data, status=200)
 
+    def card_delete(self, request, **kwargs):
+            list_id = kwargs.get('list_id')
+            card_id = kwargs.get('card_id')
+            card = get_object_or_404(Card, id=card_id, trello_list_id=list_id)
+            if request.user.is_authenticated:
+                card.delete()
+                return Response(status=200)
+
     def card_archive(self, request, **kwargs):
         cards = get_object_or_404(Card, id=kwargs.get('card_id'), trello_list_id=kwargs.get('list_id'))
         cards.archive = True

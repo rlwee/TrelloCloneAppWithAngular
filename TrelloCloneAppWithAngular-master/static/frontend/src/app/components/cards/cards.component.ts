@@ -10,6 +10,7 @@ import { CardsService } from '../../services/cards/cards.service';
 export class CardsComponent implements OnInit {
 @Input() card:Card;
 @Output() cardViews: EventEmitter<Card> = new EventEmitter();
+@Output() removecard: EventEmitter<Card> = new EventEmitter();
 
   constructor(private cardo:CardsService) { }
 
@@ -21,5 +22,9 @@ export class CardsComponent implements OnInit {
   // displayCards(){
   //   this.cardo.cardList()
   // }
+
+  deletecard(card, card_id:number, card_list:number){
+      this.removecard.emit(card)
+  }
 
 }
