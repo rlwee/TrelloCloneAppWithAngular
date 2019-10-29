@@ -18,14 +18,22 @@ import { CardsService } from '../../services/cards/cards.service';
 })
 export class BoardlistComponent implements OnInit {
   @Input() list:List;
-  
+  @Output() removelist: EventEmitter<List> =new EventEmitter();
   
 
   closeResult: string;
   lists:List[] = [];
   cards:Card[] = [];
   card:Card;
+  
+
+  id:number;
   title:string;
+  labels:string;
+  date_created:Date;
+  trello_list:number;
+  archive:boolean;
+
 
   @Output() addcard: EventEmitter<Card> =new EventEmitter()
 
@@ -71,44 +79,48 @@ export class BoardlistComponent implements OnInit {
 
   }
 
-  deletelist(list, list_id:number, list_board:number){
-    this.lists = list
+  // deletelist(list, list_id:number, list_board:number){
+  //   this.lists = list
     
-    this.deleteList.deleteList(list_id, list_board).subscribe( 
-      data => {
+  //   this.deleteList.deleteList(list_id, list_board).subscribe(
+  //     data => {
 
         
-    })
+  //   })
+  // }
+
+  deletelist(list, list_id:number, list_board:number){
+    this.removelist.emit(list);
   }
+
     
-
-  createCard():void{
-    if(this.form.valid){
-      this.createCardo.createCard(this.form.value.cardName, this.list.id).subscribe(
-        data =>{
-          this.cards.push(data);
-
-          const Card = {
-            id: data.id,
-            title: data.title,
-            labels: data.labels,
-            date_created: data.date_created,
-            trello_list:data.trello_list,
-            archive: false,
-          }
-          
-          this.addcard.emit(Card);
-      })
-      
-    }
-     
-  }
-
+  
   // createCard():void{
     
-  //   this.card.title = this.form.value.cardName
-  //   console.log(this.card.title,"title test")
+  //   if(this.form.valid){
+  //     this.createCardo.createCard(this.form.value.cardName, this.list).subscribe(
+  //       data =>{
+          
+  //         this.cards.push(card);
+  //     })
+      
+  //   }
+     
   // }
+
+  createCard(){
+    const card = {
+      id: this.id,
+      title: this.form.value.cardName,
+      labels:this.labels,
+      date_created:this.date_created,
+      trello_list:this.list.id,
+      archive:this.archive,
+    }
+    console.log(card, "pksopafkaspfkaskfop")
+
+    this.addcard.emit(card)
+  }
 
 
   

@@ -14,6 +14,7 @@ export class CardsComponent implements OnInit {
   constructor(private cardo:CardsService) { }
 
   ngOnInit() {
+    
   
   }
 

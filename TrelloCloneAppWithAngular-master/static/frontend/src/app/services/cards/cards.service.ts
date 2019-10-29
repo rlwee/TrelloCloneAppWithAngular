@@ -16,5 +16,7 @@ export class CardsService {
     let cardUrl = "/api/board/" + `${list_board}/list/${list_id}/cards/`
     return this.http.get(cardUrl)
   }
+
+  
   
 }

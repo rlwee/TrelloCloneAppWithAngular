@@ -4,6 +4,7 @@ import { BoarddetailService } from '../../services/boarddetail/boarddetail.servi
 import { Board } from '../../models/boards';
 import { BoardlistService } from '../../services/boardlist/boardlist.service';
 import { CreatecardService } from '../../services/createcard/createcard.service';
+import { DeletelistService } from '../../services/deletelist/deletelist.service';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { List } from  '../../models/lists'
@@ -18,9 +19,9 @@ import { Card } from '../../models/cards';
 
 export class BoarddetailComponent implements OnInit {
   boards:Board[] = [];
-  board:Board[]
+  board:Board[];
   lists:List[] = [];
-  cards:Card[];
+  cards:Card[] = [];
 
   
 
@@ -35,7 +36,9 @@ export class BoarddetailComponent implements OnInit {
               private route:Router, 
               private r:ActivatedRoute,
               private renderer:Renderer2,
-              private cardService:CreatecardService
+              private createCardo:CreatecardService,
+              private deleteList:DeletelistService,
+
               ) { }
 
   ngOnInit() {
@@ -59,19 +62,32 @@ export class BoarddetailComponent implements OnInit {
         console.log(this.form, "ADAS")
         this.boardDetail.createList(this.form.value.listName, this.boards).subscribe( 
         data => {
-          console.log(data,'oush')
+          console.log(this.boards,'this.boards')
+          console.log(data,'push lisst')
           this.lists.push(data)
       });
       }
     }
 
-    addcard(list:List, card:Card){
-      
-          console.log(card, 'testing testing')
-        
-          
+    // this.lists.filter(dt => dt.id !== list_id)
+
+    removelist(list:List){
+      console.log(list, "remove list")
+      this.lists = this.lists.filter(dt => dt.id !== list.id);
+
+      this.deleteList.deleteList(list.id, list.board).subscribe();
     }
 
+    addcard(card:Card){
+
+        console.log(card, 'testing testing')
+        this.createCardo.createCard(card.title, card.trello_list).subscribe(
+          data =>{
+            console.log(data, "sulod sulod")
+            this.cards.push(card);
+        })
+        
+      }
   }
 
    

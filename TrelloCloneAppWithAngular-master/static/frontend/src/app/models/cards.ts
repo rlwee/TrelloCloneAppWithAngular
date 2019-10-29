@@ -3,6 +3,6 @@ export class Card{
     title:string;
     labels:string;
     date_created:Date;
-    trello_list:string;
+    trello_list:number;
     archive:boolean;
 }
