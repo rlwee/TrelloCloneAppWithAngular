@@ -182,6 +182,17 @@ class CardViewSet(viewsets.ViewSet):
         serializer = self.serializer_class(cards)
         return Response(serializer.data, status=200)
 
+    def card_drag(self, request, **kwargs):
+        card = get_object_or_404(Card, id=kwargs.get('card_id'), trello_list__id= kwargs.get('list_id'))
+        blist = get_object_or_404(TrelloList, id=request.POST.get('id'))
+        # blist = get_object_or_404(TrelloList, id=kwargs.get('list_id'))
+        # card.trello_list = get_object_or_404(TrelloList, id=request.POST.get('list_id'))
+        card.trello_list = blist
+        serializer = self.serializer_class(card)
+        
+        card.save()
+
+        return Response(serializer.data, status=200)
 
 
 class UserViewSet(viewsets.ViewSet):
