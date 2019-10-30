@@ -10,6 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { List } from  '../../models/lists'
 import { Card } from '../../models/cards';
 
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-boarddetail',
@@ -88,6 +89,18 @@ export class BoarddetailComponent implements OnInit {
     //     })
         
     //   }
+
+    drop(event: CdkDragDrop<string[]>) {
+      if (event.previousContainer === event.container) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      } else {
+        transferArrayItem(event.previousContainer.data,
+                          event.container.data,
+                          event.previousIndex,
+                          event.currentIndex);
+      }
+    }
+
   }
 
    

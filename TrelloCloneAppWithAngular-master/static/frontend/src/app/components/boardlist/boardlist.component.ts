@@ -116,13 +116,14 @@ export class BoardlistComponent implements OnInit {
     
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      console.log(event.container,"hi")
     } else {
       transferArrayItem(event.previousContainer.data,
                         event.container.data,
                         event.previousIndex,
                         event.currentIndex);
 
-                        
+      console.log("hello")    
     }
     console.log(event.container)
   }

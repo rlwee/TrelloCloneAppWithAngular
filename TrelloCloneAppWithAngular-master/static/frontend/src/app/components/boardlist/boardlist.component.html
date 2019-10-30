@@ -7,11 +7,12 @@
 
 
 
- <div style="display: inline-block; " >
-        <div class="row mb-3">
+ <div style="display: inline-block; "  >
+        <div class="row mb-3" >
             <div class="card text-white bg-dark  ml-5 mt-4"  >
       
-                <div class="card-header" style="padding-right: 0%;" > <button style="color: #F7F0C6; background-color: transparent; border: none; display: inline;"                                        
+                <div class="card-header" 
+                     style="padding-right: 0%;" > <button style="color: #F7F0C6; background-color: transparent; border: none; display: inline;"                                        
                                                   class="nav-link" 
                                                   
                                              >
@@ -19,7 +20,7 @@
                                                                             <p style="font-size: 90%;">{{ list.title }}</p> 
                                                                       </button> 
 
-                                        <button type="button" 
+                                        <button type="button"
                                         class="btn btn-outline-secondary mr-2" 
                                         placement="right"
                                         [ngbPopover]="popContent"
@@ -32,10 +33,15 @@
                                         </button>
                 </div>
                 
-                <div class="card-body" >
+                <div class="card-body"  
+                
+                            >
                   <!-- <p class="card-text">Date Created: {{ board.date_created|date }}</p>
                   <p class="card-text">Created By: {{ board.owner }}</p> -->
-                    <div cdkDropListGroup>
+                    
+                  <!-- <div cdkDropListGroup> -->
+
+                   
                         <div
                             cdkDropList
                             
@@ -43,25 +49,23 @@
                             [cdkDropListData]="cards"
                             class="example-list"
                             (cdkDropListDropped)="drop($event)"
-                            [cdkDropListConnectedTo]="[todoList]"
+                            
                         >
-
-
                             <app-cards *ngFor="let card of cards" 
                                         [card]="card"   
                                         (removecard)="removecard($event)"
                                         cdkDrag
+                                        [cdkDragData]="card"
+                                        class="example-box"
                                         >
                             </app-cards>
                         <!-- </div> -->
                             
-                        </div>
+                        <!-- </div> -->
                     </div>
-
-                        
-
+               
                     
-                  
+                    
 
                     <form class="form-inline"  
                         [formGroup]="form"  
