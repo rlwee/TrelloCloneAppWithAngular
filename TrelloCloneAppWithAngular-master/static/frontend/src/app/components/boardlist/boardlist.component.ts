@@ -12,6 +12,7 @@ import { CreatecardService } from '../../services/createcard/createcard.service'
 import { CardsService } from '../../services/cards/cards.service';
 import { DeletecardService } from '../../services/deletecard/deletecard.service';
 
+import { DragcardService } from '../../services/dragcard/dragcard.service';
 
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
@@ -56,7 +57,8 @@ export class BoardlistComponent implements OnInit {
               private deleteList:DeletelistService,
               private createCardo:CreatecardService,
               private cardo:CardsService,
-              private delcard:DeletecardService
+              private delcard:DeletecardService,
+              private drag:DragcardService,
               ) { }
 
   ngOnInit() {
@@ -112,6 +114,7 @@ export class BoardlistComponent implements OnInit {
   }
 
 
+
   drop(event: CdkDragDrop<string[]>) {
     
     if (event.previousContainer === event.container) {
@@ -123,9 +126,14 @@ export class BoardlistComponent implements OnInit {
                         event.previousIndex,
                         event.currentIndex);
 
-      console.log("hello")    
+      console.log(event.item,"hello")    
+      
+        this.drag.dragCard(event.item.data.trello_list, event.item.data.id, this.list).subscribe( data => {
+
+        })
+
     }
-    console.log(event.container)
+    
   }
 
 
