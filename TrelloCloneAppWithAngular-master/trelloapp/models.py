@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
@@ -9,6 +11,8 @@ from rest_framework.authtoken.models import Token
 
 from django.contrib.auth.signals import user_logged_in
 from django.contrib.auth.models import User
+
+
 # Create your models here.
 
 
@@ -41,6 +45,15 @@ class Card(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class BoardInvite(models.Model):
+    member = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    board = models.ForeignKey('Board', on_delete=models.CASCADE)
+    email = models.EmailField(max_length= 50)
+
+    def __str__(self):
+        return self.email
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

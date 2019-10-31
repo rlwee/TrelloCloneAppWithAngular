@@ -12,8 +12,11 @@ import { DeleteboardComponent } from './components/deleteboard/deleteboard.compo
 import { BoardlistComponent } from './components/boardlist/boardlist.component';
 import { DeletelistComponent } from './components/deletelist/deletelist.component';
 import { CardsComponent } from './components/cards/cards.component';
+import { BoardinviteComponent } from './components/boardinvite/boardinvite.component';
 
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { from } from 'rxjs';
+import { BoardinviteService } from './services/boardinvite/boardinvite.service';
 
 const routes: Routes = [
                       {path: '', component: LoginComponent},
@@ -25,7 +28,8 @@ const routes: Routes = [
                       {path: 'board/:id/deleted', component:DeleteboardComponent},
                       {path: 'board/detail/:id/lists', component:BoardlistComponent},
                       {path: 'board/:board/list/:id/deleted', component:DeletelistComponent},
-                      {path: 'board/:id/list/:id/cards', component:CardsComponent}
+                      {path: 'board/:id/list/:id/cards', component:CardsComponent},
+                      {path: 'board/:id/invite', component:BoardinviteComponent},
                        ];
 
 @NgModule({

@@ -5,7 +5,8 @@ from trelloapp.views import (BoardViewSet,
                              TrelloListViewSet,
                             #  api_root,
                              CardViewSet,
-                             UserViewSet
+                             UserViewSet,
+                             BoardInviteViewSet
                                 )
 
 
@@ -28,6 +29,7 @@ urlpatterns = [
     path('list/<int:list_id>/card/<int:card_id>/dragged/<int:id>/', CardViewSet.as_view({'post':'card_drag'}), name='card-drag'),
     path('users/signup/', UserViewSet.as_view({'post':'user_create'}),name='users-create'),
     path('users/login/', UserViewSet.as_view({'post':'user_login'}),name='users-login'),
+    path('boards/<int:board_id>/invite/', BoardInviteViewSet.as_view({'post':'invite_member'}), name='board-invite'),
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns = format_suffix_patterns(urlpatterns) 

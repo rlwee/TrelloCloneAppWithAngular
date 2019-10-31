@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Board, TrelloList, Card
+from .models import Board, TrelloList, Card, BoardInvite
 from django.contrib.auth.models import User, Group
 from django import forms
 from rest_framework.validators import UniqueValidator
@@ -53,20 +53,12 @@ class CardSerializer(serializers.ModelSerializer):
                   'archive')
 
 
-# class SignUpSerializer(serializers.ModelSerializer):
+class MemberInviteSerializer(serializers.ModelSerializer):
 
-#     class Meta:
-#         model = User
+    # email = forms.CharField(label='email',widget=forms.EmailInput(attrs={'placeholder':'Enter email'})) 
 
+    class Meta:
+        model = BoardInvite
+        fields = ('board','email')
 
-# class SignUpSerializer(UserCreationForm):
-#     first_name = forms.CharField(max_length=20, required=False,help_text='Optional.')
-#     last_name = forms.CharField(max_length=20,required=False, help_text='Optional.')
-#     email = forms.EmailField(max_length=20,help_text='Required! Enter a valid email address')
-
-#     class Meta:
-#         model = User
-#         fields = ('username','first_name',
-#                   'last_name','email',
-#                   'password1','password2',
-#                  )
+    

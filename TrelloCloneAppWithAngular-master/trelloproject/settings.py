@@ -38,6 +38,15 @@ CORS_ORIGIN_WHITELIST = (
      'http://192.168.1.17:8000',
  )
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'hellotrelloclone@gmail.com'
+EMAIL_HOST_PASSWORD = 'kajlyglpkgpptmtw'
+EMAIL_USE_TLS = True
+
+
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',

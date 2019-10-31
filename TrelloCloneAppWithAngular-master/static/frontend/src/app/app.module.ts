@@ -27,6 +27,7 @@ import { CardsComponent } from './components/cards/cards.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CreateuserComponent } from './components/createuser/createuser.component';
+import { BoardinviteComponent } from './components/boardinvite/boardinvite.component';
 
 @NgModule({
   declarations: [ 
@@ -44,6 +45,7 @@ import { CreateuserComponent } from './components/createuser/createuser.componen
     DeletelistComponent,
     CardsComponent,
     CreateuserComponent,
+    BoardinviteComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,8 +8,8 @@ from rest_framework.response  import Response
 from rest_framework.reverse import reverse
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
-from trelloapp.models import Board, TrelloList, Card
-from .serializers import BoardSerializer,TrelloListSerializer, CardSerializer, UserSerializer
+from trelloapp.models import Board, TrelloList, Card, BoardInvite
+from .serializers import BoardSerializer,TrelloListSerializer, CardSerializer, UserSerializer, MemberInviteSerializer
 
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.models import User
@@ -20,6 +20,10 @@ from .permissions import IsOwnerOrReadOnly
 from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth.forms import AuthenticationForm
+
+from django.core.mail import send_mail
+from django.conf import settings
+from django.template import loader
 
 
 # Create your views here.
@@ -92,6 +96,8 @@ class BoardViewSet(viewsets.ViewSet):
         if request.user.is_authenticated:
             boards.delete()
             return Response(status=200)
+
+
 
 
 class TrelloListViewSet(viewsets.ViewSet):
@@ -225,19 +231,6 @@ class UserViewSet(viewsets.ViewSet):
             print(token.key, 'token')
             return Response(token.key, status=200)
         return Response(status=400)
-        # import pdb; pdb.set_trace()
-        # form = AuthenticationForm(request=request, data=request.POST)
-        # if form.is_valid():
-        #     username = form.request.data.get('username')
-        #     password = form.request.data.get('password')
-        #     user = authenticate(username=username, password=password)
-        #     if user is not None:
-        #         token = Token.objects.get(user=user)
-        #         print(token.key, 'token')
-        #         return Response(token.key, status=200)
-        #     else:
-        #         messages.error(request, f"Invalid username or password")
-        # return Response(status=400)
             
     
     def user_create(self, request, **kwargs):
@@ -259,3 +252,47 @@ class UserViewSet(viewsets.ViewSet):
         serializer = self.serializer_class(users)
         return Response(serializer.data, status=200)
     
+
+
+class BoardInviteViewSet(viewsets.ViewSet):
+
+    queryset = ''
+    serializer_class = MemberInviteSerializer
+
+    def invite_member(self, request, **kwargs):
+        
+        board_id = kwargs.get('board_id')
+        board = get_object_or_404(Board, pk=board_id)
+        serializer = self.serializer_class(data=request.data)
+        userEmail = request.user.email
+        domain = request.META['HTTP_HOST']
+
+        if serializer.is_valid():
+            test = serializer.save()
+            # serializer.board = board
+            # serializer.email = serializer
+            
+            # member = BoardInvite.objects.filter(board=test.board, email=test.email)
+            
+
+
+            # if not member.exists():
+            test.save()
+            receiver = request.POST.get('email')
+            subject = 'Hi hello hey ! You have a Trello board invitation'
+            message = 'You have received and invitation to a board!'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [receiver,]
+            
+            html_message = loader.render_to_string(
+                            'invitation.html',
+                            {
+                            'uid':test.member,
+                            'domain':domain,
+                            'board_id':board.id,
+                            'board':board}
+                                                    )
+            send_mail(subject, message, email_from, recipient_list,fail_silently=True, html_message=html_message)
+            # import pdb; pdb.set_trace()
+            return Response(serializer.data, status=200) 
+        return Response(status=400)

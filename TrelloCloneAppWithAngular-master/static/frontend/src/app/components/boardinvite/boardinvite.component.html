@@ -1,0 +1,45 @@
+<app-header></app-header>
+
+<div style="text-align:center">
+  <h1>
+    Board Invitation
+  </h1>
+
+
+
+    <form
+      [formGroup]="form"  
+      (ngSubmit)="inviteMember()" 
+      
+      id="login-form"
+    >
+
+        <input 
+          formControlName="email"
+          id="email-input" 
+          class="form-control" 
+          type="text" 
+          name="email"
+          placeholder="enter email"
+        >
+
+        <!-- <input 
+          formControlName="board"
+          id="board-input" 
+          class="form-control" 
+          type="text" 
+          name="board"
+          placeholder="board"
+        > -->
+        
+        <button 
+          type="submit"
+        >
+          Invite
+        </button>
+    
+    </form>
+    
+
+
+</div>
