@@ -19,6 +19,8 @@ from .permissions import IsOwnerOrReadOnly
 
 from django.views.decorators.csrf import csrf_exempt
 
+from django.contrib.auth.forms import AuthenticationForm
+
 
 # Create your views here.
 # @api_view(['GET']) # new
@@ -212,6 +214,7 @@ class UserViewSet(viewsets.ViewSet):
      
     def user_login(self, request, **kwargs):
         print('userloginz')
+        # import pdb; pdb.set_trace()
         username = request.data.get('username')
         password = request.data.get('password') 
         user = authenticate(request, username=username, password=password)
@@ -222,14 +225,34 @@ class UserViewSet(viewsets.ViewSet):
             print(token.key, 'token')
             return Response(token.key, status=200)
         return Response(status=400)
+        # import pdb; pdb.set_trace()
+        # form = AuthenticationForm(request=request, data=request.POST)
+        # if form.is_valid():
+        #     username = form.request.data.get('username')
+        #     password = form.request.data.get('password')
+        #     user = authenticate(username=username, password=password)
+        #     if user is not None:
+        #         token = Token.objects.get(user=user)
+        #         print(token.key, 'token')
+        #         return Response(token.key, status=200)
+        #     else:
+        #         messages.error(request, f"Invalid username or password")
+        # return Response(status=400)
             
     
     def user_create(self, request, **kwargs):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            serializer = serializer.save()
-            return Response(serializer.username, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=400)
+
+        # serializer = self.serializer_class(data=self.request.data)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return Response(serializer.data, status=200)
+        # return Response(serializer.data)
+        
     
     def user_detail(self, request, **kwargs):
         users = get_object_or_404(User, id=kwargs.get('user_id'))

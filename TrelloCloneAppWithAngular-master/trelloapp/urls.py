@@ -17,7 +17,7 @@ urlpatterns = [
     path('boards/<int:board_id>/', BoardViewSet.as_view({'get':'board_detail','post':'board_archive'})),
     path('board/<int:board_id>/list/<int:list_id>/', TrelloListViewSet.as_view({'get':'trello_list_detail','post':'trello_list_archive'}), name='list-detail'),
     path('board/<int:board_id>/list/<int:list_id>/card/<int:card_id>/', CardViewSet.as_view({'get':'card_detail','post':'card_archive'}), name='card-archive'),
-    path('users/login/', UserViewSet.as_view({'post':'user_login'}),name='users-login'),
+    
     path('user/<int:user_id>/', UserViewSet.as_view({'get':'user_detail'}),name='users'),
     path('user/register/', UserViewSet.as_view({'post':'user_create'}),name='register'),
     path('board/<int:board_id>/deleted/', BoardViewSet.as_view({'get':'board_delete'}),name='boards'),
@@ -26,6 +26,8 @@ urlpatterns = [
     path('board/<int:board_id>/list/<int:list_id>/cards/', CardViewSet.as_view({'get':'card_list'}), name='card-list'),
     path('list/<int:list_id>/card/<int:card_id>/deleted/', CardViewSet.as_view({'get':'card_delete'}), name='card-delete'),
     path('list/<int:list_id>/card/<int:card_id>/dragged/<int:id>/', CardViewSet.as_view({'post':'card_drag'}), name='card-drag'),
+    path('users/signup/', UserViewSet.as_view({'post':'user_create'}),name='users-create'),
+    path('users/login/', UserViewSet.as_view({'post':'user_login'}),name='users-login'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -16,7 +16,7 @@ import { CardsComponent } from './components/cards/cards.component';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
 const routes: Routes = [
-                      {path: 'users', component: LoginComponent},
+                      {path: '', component: LoginComponent},
                       {path: 'register', component: RegisterComponent},
                       {path: 'dashboard', component: DashboardComponent},
                       {path: 'boards', component: BoardsComponent},

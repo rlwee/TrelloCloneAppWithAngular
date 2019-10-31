@@ -7,7 +7,7 @@
 
     <form 
       [formGroup]="form"  
-      (ngSubmit)="registerUser()" 
+      (ngSubmit)="createUser()" 
       class="w-100"
       id="login-form"
     >
@@ -22,10 +22,19 @@
         >
 
         <input 
+          formControlName="email"
+          id="email-input" 
+          class="form-control" 
+          type="text" 
+          name="email"
+          placeholder="email"
+        >
+
+        <input 
           formControlName="password"
           id="password-input" 
           class="form-control" 
-          type="text" 
+          type="password" 
           name="password"
           placeholder="password"
         >
@@ -33,9 +42,17 @@
         <button 
           type="submit"
         >
-          login
+          SignUp
         </button>
     
     </form>
+    <p (ngClick)="registerUser()">Already have a Trello account? click 
+          <a [routerLink]="['/']"
+             (ngClick)="registerUser()" 
+              >here
+          </a> 
 
-</div>
+              to login
+    </p>
+
+  </div>
